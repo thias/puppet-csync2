@@ -1,3 +1,7 @@
+2013-04-16 - 0.1.1
+* Add csync2::cfg defition to manage multiple configurations.
+* Use csync2::cfg and csync2::key from the main class for the defaults.
+
 2013-04-16 - 0.1.0
 * Initial module release.
 

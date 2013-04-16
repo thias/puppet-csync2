@@ -18,22 +18,24 @@ class csync2 (
 
   package { 'csync2': ensure => installed }
 
-  # Configuration, optional main key
-  file { '/etc/csync2/csync2.cfg':
-    source  => $cfg_source,
-    content => $cfg_content,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    require => Package['csync2'],
+  # Optional main configuration and main key files
+  if $cfg_source or $cfg_content {
+    csync2::cfg { 'MAIN':
+      source  => $cfg_source,
+      content => $cfg_content,
+    }
+  } else {
+    csync2::cfg { 'MAIN':
+      ensure => absent,
+    }
   }
   if $key_source or $key_content {
-    csync2::key { 'csync2':
+    csync2::key { 'MAIN':
       source  => $key_source,
       content => $key_content,
     }
   } else {
-    csync2::key { 'csync2':
+    csync2::key { 'MAIN':
       ensure => absent,
     }
   }

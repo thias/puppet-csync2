@@ -1,21 +1,21 @@
-# Define: csync2::key
+# Define: csync2::cfg
 #
-# Simple definition to manage pre-created csync2 key files.
+# Simple definition to manage pre-created csync2 configuration files.
 #
 # Sample Usage :
-#  csync2::key { 'group1':
-#    source => 'puppet://modules/mymodule/csync2/group1.key',
+#  csync2::cfg { 'group1':
+#    source => 'puppet://modules/mymodule/csync2/group1.cfg',
 #  }
 #
-define csync2::key (
+define csync2::cfg (
   $source  = undef,
   $content = undef,
   $ensure  = undef
 ) {
 
   $filename = $title ? {
-    'MAIN'  => "csync2.key",
-    default => "csync2_${title}.key",
+    'MAIN'  => "csync2.cfg",
+    default => "csync2_${title}.cfg",
   }
 
   file { "/etc/csync2/${filename}":
